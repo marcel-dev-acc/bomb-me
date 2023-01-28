@@ -9,11 +9,11 @@ import {GameEngine} from 'react-native-game-engine';
 import COLOURS from '../../constants/colours';
 import SCREEN from '../../constants/device';
 
-import Bomber from '../../components/Bomber/Bomber';
+import entities from './Entities';
 import GameLoop from '../../components/GameLoop/GameLoop';
 import NavControls from '../../components/Controls/NavControls';
 import Controls from '../../components/Controls/Controls';
-import {randomBetween} from '../../utils/random';
+
 
 type GameEvent = {
   type: string;
@@ -40,20 +40,9 @@ const Game = () => {
         ref={(ref: any) => { setEngine(ref) }}
         style={[styles.gameEngine, {
           width: boardSize,
-          height: '100%',
+          height: boardSize,
         }]}
-        entities={{
-          bomber: {
-            position: [0,0],
-            xSpeed: 1,
-            ySpeed: 0,
-            size: SCREEN.CELL_SIZE,
-            updateFrequency: 10,
-            nextMove: 10,
-            direction: 'right',
-            renderer: <Bomber />,
-          },
-        }}
+        entities={entities}
         systems={[ GameLoop ]}
         onEvent={handleEvent}
         running={gameRunning}
